@@ -1,0 +1,35 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'app.northest'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'app.northest'
+        minSdk 24
+        targetSdk 35
+        versionCode 2
+        versionName '1.0.1'
+    }
+    signingConfigs {
+        release {
+            storeFile file('../northest-release.jks')
+            storePassword System.getenv('NORTHEST_KS_PASS')
+            keyAlias 'northest'
+            keyPassword System.getenv('NORTHEST_KS_PASS')
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies { implementation 'androidx.webkit:webkit:1.12.1' }
