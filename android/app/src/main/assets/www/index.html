@@ -332,8 +332,10 @@ body.l-glass .st{border-color:rgba(255,255,255,.07)!important}
   <div class="sec" data-sec="phases">
     <h2 data-n="Moon phases" data-s="Moon phases">Moon phases</h2>
     <p class="sub" data-n="Tap a moon to learn about that phase." data-s="Tap one to read about it.">Tap a moon to learn about that phase.</p>
-    <div class="ring" id="ring">
-      <div class="center"><div class="k">Now</div><div class="v" id="ringNow">—</div><div class="s" id="ringSub"></div></div>
+    <div class="card ringcard">
+      <div class="ring" id="ring">
+        <div class="center"><div class="k">Now</div><div class="v" id="ringNow">—</div><div class="s" id="ringSub"></div></div>
+      </div>
     </div>
   </div>
 
@@ -341,7 +343,9 @@ body.l-glass .st{border-color:rgba(255,255,255,.07)!important}
   <div class="sec" data-sec="orbit">
     <h2 data-n="Orbits" data-s="Orbits">Orbits</h2>
     <p class="sub" data-n="Where the moon is in its orbit right now." data-s="The moon circles Earth. The sun lights one side.">Where the moon is in its orbit right now.</p>
-    <canvas id="orbit" aria-label="Sun, Earth and Moon seen from above"></canvas>
+    <div class="card orbitcard">
+      <canvas id="orbit" aria-label="Sun, Earth and Moon seen from above"></canvas>
+    </div>
   </div>
 
   </div>
