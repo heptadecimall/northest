@@ -802,6 +802,17 @@ function animateTo(target){
   animId=requestAnimationFrame(step);
 }
 
+function introMoon(){
+  // on open: start at new moon (0% lit) and fill up to tonight's phase
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){GAIN=1;drawHeroMoon(new Date());return;}
+  cancelAnimationFrame(animId);GAIN=0;drawHeroMoon(new Date());
+  const DELAY=250,DUR=1800,ease=x=>1-Math.pow(1-x,3);let t0=null;
+  const step=now=>{if(t0===null)t0=now;const e=now-t0-DELAY;
+    GAIN=e<=0?0:ease(min(1,e/DUR));drawHeroMoon(new Date());
+    if(e<DUR)animId=requestAnimationFrame(step);else{animId=0;GAIN=1;drawHeroMoon(new Date());}};
+  animId=requestAnimationFrame(step);
+}
+
 /* ===== now & next ===== */
 function renderEvents(t){
   const host=$('events');host.innerHTML='';
@@ -1169,7 +1180,7 @@ function setView(v){if(S.view===v)return;S.view=v;store.set('view',v);renderHero
 $('vSky').onclick=()=>setView('sky');$('vGlobal').onclick=()=>setView('global');
 $('locname').textContent=S.loc.name;
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{drawStars();buildRing();renderAll();},150);});
-applyCfg();buildRing();renderAll();setInterval(renderAll,60000);
+applyCfg();buildRing();renderAll();introMoon();setInterval(renderAll,60000);
 window.__r={openPhase,moonIllum,moonPos};
 })();
 </script>
